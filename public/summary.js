@@ -66,6 +66,7 @@ function deleteItem(n, id) {
         .catch(error => {
             console.error('Error loading JSON file:', error);
         });
+        window.location.href='/'+n+'.html';
 }
 function balanceinit() {
     balancesMap = new Map();

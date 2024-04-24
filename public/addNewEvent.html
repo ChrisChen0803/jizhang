@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Event</title>
+    <script src="add.js"></script>
+    <style>
+        body{
+            margin: 100px;
+        }
+        form {
+            line-height: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>添加款项</h2>
+    <form id="newEventForm" onsubmit="return submitForm(event)">
+        <label for="eventName">事件名称</label>
+        <input type="text" name="eventName" id="eventName" required><br>
+        <label for="amount">金额</label>
+        <input type="number" name="amount" id="amount" required><br>
+        <label for="payer">付款人</label>
+        <select name="payer" id="payer" required>
+            <option value="" selected hidden>请选择付款人</option>
+        </select><br>
+        <label for="participants">参与人员</label>
+        <!-- <select name="participants" id="participants" multiple>
+            <option value="none" selected disabled>请选择参与人员</option>
+        </select> -->
+        <ul id="participantsList" required>
+            <!-- Checkboxes will be dynamically generated here -->
+        </ul><br>
+        <label for="note">备注</label>
+        <input type="text" name="note" id="note"><br>
+        <button type="submit" id="submit">新建事项</button>
+    </form>
+</body>
+
+</html>

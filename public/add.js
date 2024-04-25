@@ -18,7 +18,7 @@ function writePersonalEvents(data) {
         let n = idToNameMap.get(parseInt(p))
         console.log(n)
         if (p != payer) {
-            var newid = new Date().valueOf().toString();
+            var newid = data.id;
             formData = {
                 "id": newid,
                 "eventName": data.eventName,

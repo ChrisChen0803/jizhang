@@ -26,6 +26,20 @@ app.post('/save-event', (req, res) => {
     });
 });
 
+app.post('/update-event', (req, res) => {
+    const data = req.body;
+    const jsonString = JSON.stringify(data);
+    fs.writeFile('public/events.json', jsonString, 'utf8', (err) => {
+        if (err) {
+            console.error('Error writing file:', err);
+            res.status(500).send('Error saving event');
+            return;
+        }
+        console.log('Event saved successfully!');
+        res.status(200).send('Event saved successfully');
+    });
+});
+
 app.post('/add-personal', (req, res) => {
     const data = req.body;
     const name = req.get('X-Name');

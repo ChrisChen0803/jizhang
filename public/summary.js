@@ -38,7 +38,7 @@ function printEvent(data, n) {
     data.forEach(function (item) {
         itemId = item.id;
         html += "<li>EventName: " + item.eventName + ", Amount: " + item.amount + ", Payer: " + idToNameMap.get(parseInt(item.payer))
-            + "<button type='button' onclick='deleteItem(\"" + n + "\"," + itemId + ")'>Delete</button>" + "</li>";
+            + "<button type='button' onclick='deleteItem(\"" + n + "\"," + itemId + ")'>删除</button>" + "</li>";
     });
     html += "</ul>";
     events.innerHTML = html;

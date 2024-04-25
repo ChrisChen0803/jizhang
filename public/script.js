@@ -14,9 +14,8 @@ function printNamesAndIds(data) {
 
   data.forEach(function (item) {
     html += "<li>活动名称: " + item.eventName + ", 金额: " + item.amount + ", 付款人: " + idToNameMap.get(parseInt(item.payer))
-      + ", 参与成员: " + getAll(item.participants) + "</li>";
+      + ", 参与成员: " + getAll(item.participants) + "<button type='button' onclick='deleteItem(" + item.id + ")'>删除</button>" + "</li>";
   });
-
   html += "</ul>";
   allEventDiv.innerHTML = html;
 }
@@ -53,4 +52,29 @@ function addButtons() {
     pbuttonsDiv.appendChild(button);
     pbuttonsDiv.appendChild(document.createElement("br"));
   });
+}
+
+function deleteItem(id) {
+  fetch('events.json')
+      .then(response => {
+          return response.json();
+      })
+      .then(data => {
+          var index = data.findIndex(function (event) {
+              return event.id === id;
+          });
+          data.splice(index, 1);
+          console.log(data);
+          const headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          fetch('/update-event', {
+              method: 'POST',
+              headers: headers,
+              body: JSON.stringify(data) // directly pass the object here
+          })
+      })
+      .catch(error => {
+          console.error('Error loading JSON file:', error);
+      });
+      //window.location.href='/index.html';
 }

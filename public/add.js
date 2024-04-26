@@ -1,4 +1,12 @@
 let idToNameMap = new Map();
+document.addEventListener("DOMContentLoaded", function () {
+    const backButton = document.getElementById("backToMainButton");
+
+    backButton.addEventListener("click", function () {
+
+        window.location.href = "/index.html";
+    });
+});
 function writePersonalEvents(data) {
     let balance = parseFloat(data.amount);
     let payer = data.payer;

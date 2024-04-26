@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>记账本</title>
+    <link rel="icon" type="image/png" href="pictures/icon.png">
+    <link rel="stylesheet" href="global.css">
+    <title>YoYo记账本</title>
     <script src="script.js"></script>
     <style>
-        body{
-            margin: 100px;
-            line-height: 2;
+
+        .container,#personalbuttons {
+            display: flex;
+            align-items: center;
+        }
+        .pictures {
+            margin-left: 100px;
+            display: flex;
+            align-items: center;
+        }
+
+        .pictures img {
+            width: 50px;
+            height: auto;
+            margin-left: 10px;
         }
     </style>
 </head>
+
 <body>
-    <h1>记账本</h1>
-    <section id="eventSection">
-        <h3>当前账目</h3>
+    <div class="container">
+        <h1>YoYo记账本</h1>
+        <div class="pictures">
+            <img src="pictures/koala.png" alt="Koala">
+            <img src="pictures/lamb.png" alt="Lamb">
+            <img src="pictures/lion.png" alt="lion">
+            <img src="pictures/sloth.png" alt="sloth">
+            <img src="pictures/chipmunk.png" alt="chipmunk">
+            <img src="pictures/fish.png" alt="fish">
+            <img src="pictures/capybara.png" alt="capybara">
+            <img src="pictures/fox.png" alt="fox">
+            <img src="pictures/octopus.png" alt="octopus">
+        </div>
+    </div>
+    <div id="eventSection">
+        <h2>当前账目</h2>
         <div id="allEvent"></div>
-    </section>
-    <button type="button" id="addButton">Add New Event</button>
+        <button type="button" id="addButton">新建事项</button>
+    </div>
     <section id="personalPage">
-        <h3>个人页面</h3>
+        <h2>个人页面</h2>
         <div id="personalbuttons"></div>
     </section>
 </body>
+
 </html>

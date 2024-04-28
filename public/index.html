@@ -9,11 +9,12 @@
     <title>YoYo记账本</title>
     <script src="script.js"></script>
     <style>
-
-        .container,#personalbuttons {
+        .container,
+        #personalbuttons {
             display: flex;
             align-items: center;
         }
+
         .pictures {
             margin-left: 100px;
             display: flex;
@@ -25,6 +26,31 @@
             height: auto;
             margin-left: 10px;
         }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pictures {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
+            .pictures img {
+                width: 30px;
+            }
+            #personalbuttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            #personalbuttons button {
+                margin: 5px;
+            }
+        }
+
     </style>
 </head>
 

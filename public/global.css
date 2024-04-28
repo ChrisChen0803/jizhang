@@ -13,6 +13,13 @@ body {
     margin: 80px;
     line-height: 2;
 }
+h1{
+    color:rgba(255, 166, 0, 0.937)
+}
+h2{
+    color:salmon;
+}
+
 
 #newEventForm,
 #events,

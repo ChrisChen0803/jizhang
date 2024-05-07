@@ -40,6 +40,14 @@ function getEvent(n) {
             console.error('Error loading JSON file:', error);
         });
 }
+function getKeyByValue(map, searchValue) {
+    for (let [key, value] of map.entries()) {
+        if (value === searchValue) {
+            return key;
+        }
+    }
+    return null; // Return null if the value is not found
+}
 function printEvent(data, n) {
     var events = document.getElementById("events");
     var html = "<ul>";
@@ -50,6 +58,47 @@ function printEvent(data, n) {
     });
     html += "</ul>";
     events.innerHTML = html;
+}
+function resetBlc(data,p1, id) {
+    data = data.filter(function (item) {
+        return item.payer != id;
+    });
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('X-Name', p1);
+    fetch('/save-personal', {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(data) // directly pass the object here
+    })
+    window.location.href = '/' + n + '.html';
+
+}
+function reset(id1, id2) {
+    let person1 = idToNameMap.get(id1);
+    let person2 = idToNameMap.get(id2);
+    let filename1 = person1 + '.json';
+    let filename2 = person2 + '.json';
+    fetch(filename1)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            return resetBlc(data,person1, id2);
+        })
+        .catch(error => {
+            console.error('Error loading JSON file:', error);
+        });
+    fetch(filename2)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            return resetBlc(data,person2, id1);
+        })
+        .catch(error => {
+            console.error('Error loading JSON file:', error);
+        });
 }
 function deleteItem(n, id) {
     let filename = n + '.json'
@@ -147,8 +196,10 @@ function printSummary(data, n) {
         table.appendChild(headerRow);
         balancesMap.forEach((value, key) => {
             const row = document.createElement('tr');
-            let translateName = idToNameMap.get(key)
-            row.innerHTML = `<td>${translateName}</td><td>${value}</td>`;
+            let translateName = idToNameMap.get(key);
+            let number = getKeyByValue(idToNameMap, n);
+            let s ="<button type='button' class='reset' onclick='reset(" + number + "," + key + ")'>清零</button>";
+            row.innerHTML = `<td>${translateName}</td><td>${value}</td>`+s;
             table.appendChild(row);
         });
         summaries.appendChild(table);

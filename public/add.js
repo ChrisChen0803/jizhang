@@ -86,6 +86,7 @@ function submitForm(event) {
             participants.push(checkbox.value);
         }
     });
+    var date = document.getElementById('date').value;
     var note = document.getElementById('note').value;
     var newid = new Date().valueOf().toString();
 
@@ -96,6 +97,7 @@ function submitForm(event) {
         "amount": amount,
         "payer": payer,
         "participants": participants,
+        "date": date,
         "note": note
     }
     fetch('/save-event', {

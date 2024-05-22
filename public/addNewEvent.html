@@ -24,7 +24,7 @@
         <label for="eventName">事件名称</label>
         <input type="text" name="eventName" id="eventName" required><br>
         <label for="amount">金额</label>
-        <input type="number" name="amount" id="amount" required><br>
+        <input type="number" name="amount" step="0.01" id="amount" required><br>
         <label for="payer">付款人</label>
         <select name="payer" id="payer" required>
             <option value="" selected hidden>请选择付款人</option>
@@ -36,6 +36,8 @@
         <ul id="participantsList" required>
             <!-- Checkboxes will be dynamically generated here -->
         </ul><br>
+        <label for="date">日期</label>
+        <input type="date" name="date" id="date"><br>
         <label for="note">备注</label>
         <input type="text" name="note" id="note"><br>
         <button type="submit" id="submit">新建事项</button>

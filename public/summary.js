@@ -1,6 +1,8 @@
 let idToNameMap = new Map();
 let balancesMap = new Map();
 var fetchPromises = [];
+var currentPage = window.location.pathname.split("/").pop();
+n = currentPage.split(".")[0];
 fetch('name.json')
     .then(response => {
         return response.json();
@@ -10,13 +12,13 @@ fetch('name.json')
         // console.log('Map:', idToNameMap);
         balanceinit();
     })
+    .then(d => {
+        getEvent(n);
+        getSummary(n);
+    })
     .catch(error => {
         console.error('Error loading JSON file:', error);
     });
-var currentPage = window.location.pathname.split("/").pop();
-n = currentPage.split(".")[0];
-getEvent(n);
-getSummary(n);
 document.addEventListener("DOMContentLoaded", function () {
     const backButton = document.getElementById("backToMainButton");
 
@@ -42,7 +44,7 @@ function getEvent(n) {
 }
 function getKeyByValue(map, searchValue) {
     for (let [key, value] of map.entries()) {
-        if (value === searchValue) {
+        if (value == searchValue) {
             return key;
         }
     }
@@ -59,7 +61,7 @@ function printEvent(data, n) {
     html += "</ul>";
     events.innerHTML = html;
 }
-function resetBlc(data,p1, id) {
+function resetBlc(data, p1, id) {
     data = data.filter(function (item) {
         return item.payer != id;
     });
@@ -84,7 +86,7 @@ function reset(id1, id2) {
             return response.json();
         })
         .then(data => {
-            return resetBlc(data,person1, id2);
+            return resetBlc(data, person1, id2);
         })
         .catch(error => {
             console.error('Error loading JSON file:', error);
@@ -94,7 +96,7 @@ function reset(id1, id2) {
             return response.json();
         })
         .then(data => {
-            return resetBlc(data,person2, id1);
+            return resetBlc(data, person2, id1);
         })
         .catch(error => {
             console.error('Error loading JSON file:', error);
@@ -108,7 +110,7 @@ function deleteItem(n, id) {
         })
         .then(data => {
             var index = data.findIndex(function (event) {
-                return event.id === id;
+                return event.id == id;
             });
             data.splice(index, 1);
             const headers = new Headers();
@@ -119,11 +121,12 @@ function deleteItem(n, id) {
                 headers: headers,
                 body: JSON.stringify(data) // directly pass the object here
             })
+        }).then(d=>{
+            window.location.href = '/' + n + '.html';
         })
         .catch(error => {
             console.error('Error loading JSON file:', error);
         });
-    window.location.href = '/' + n + '.html';
 }
 function balanceinit() {
     balancesMap = new Map();
@@ -198,8 +201,8 @@ function printSummary(data, n) {
             const row = document.createElement('tr');
             let translateName = idToNameMap.get(key);
             let number = getKeyByValue(idToNameMap, n);
-            let s ="<button type='button' class='reset' onclick='reset(" + number + "," + key + ")'>清零</button>";
-            row.innerHTML = `<td>${translateName}</td><td>${value}</td>`+s;
+            let s = "<button type='button' class='reset' onclick='reset(" + number + "," + key + ")'>清零</button>";
+            row.innerHTML = `<td>${translateName}</td><td>${value}</td>` + s;
             table.appendChild(row);
         });
         summaries.appendChild(table);

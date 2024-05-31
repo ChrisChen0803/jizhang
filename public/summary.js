@@ -52,13 +52,13 @@ function getKeyByValue(map, searchValue) {
 }
 function printEvent(data, n) {
     var events = document.getElementById("events");
-    var html = "<ul>";
+    var html = "<ol>";
     data.forEach(function (item) {
         itemId = item.id;
         html += "<li>活动名称: " + item.eventName + ", 金额: " + item.amount + ", 付款人: " + idToNameMap.get(parseInt(item.payer))
             + "<button type='button' class='delete' onclick='deleteItem(\"" + n + "\"," + itemId + ")'>删除</button>" + "</li>";
     });
-    html += "</ul>";
+    html += "</ol>";
     events.innerHTML = html;
 }
 function resetBlc(data, p1, id) {

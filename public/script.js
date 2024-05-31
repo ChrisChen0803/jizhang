@@ -10,13 +10,13 @@ function getAll(inds) {
 }
 function printNamesAndIds(data) {
   var allEventDiv = document.getElementById("allEvent");
-  var html = "<ul>";
+  var html = "<ol>";
 
   data.forEach(function (item) {
     html += "<li>活动名称: " + item.eventName + ", 金额: " + item.amount + ", 付款人: " + idToNameMap.get(parseInt(item.payer))
       + ", 参与成员: " + getAll(item.participants) + ", 日期：" + item.date + ", 备注：" + item.note + "<button type='button' class='delete' onclick='deleteItem(" + item.id + ")'>删除</button>" + "</li>";
   });
-  html += "</ul>";
+  html += "</ol>";
   allEventDiv.innerHTML = html;
 }
 
